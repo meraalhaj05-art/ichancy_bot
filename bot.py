@@ -1799,14 +1799,20 @@ async def reject_charge_callback(update: Update, context: ContextTypes.DEFAULT_T
 
     with closing(sqlite3.connect(DB_PATH)) as conn:
         c = conn.cursor()
+        # جلب user_id قبل التحديث
+        c.execute("SELECT user_id FROM pending_charges WHERE id = ?", (charge_id,))
+        row = c.fetchone()
+        target_user_id = row[0] if row else None
+
         c.execute("UPDATE pending_charges SET status = 'rejected' WHERE id = ?", (charge_id,))
         conn.commit()
 
     await query.edit_message_text(f"❌ تم رفض طلب الشحن {charge_id}.")
-    try:
-        await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب الشحن الخاص بك (رقم {charge_id}). يرجى التواصل مع الدعم.")
-    except:
-        pass
+    if target_user_id:
+        try:
+            await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب الشحن الخاص بك (رقم {charge_id}). يرجى التواصل مع الدعم.")
+        except:
+            pass
 
 async def confirm_withdraw_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -1857,14 +1863,20 @@ async def reject_withdraw_callback(update: Update, context: ContextTypes.DEFAULT
 
     with closing(sqlite3.connect(DB_PATH)) as conn:
         c = conn.cursor()
+        # جلب user_id قبل التحديث
+        c.execute("SELECT user_id FROM pending_withdrawals WHERE id = ?", (withdraw_id,))
+        row = c.fetchone()
+        target_user_id = row[0] if row else None
+
         c.execute("UPDATE pending_withdrawals SET status = 'rejected' WHERE id = ?", (withdraw_id,))
         conn.commit()
 
     await query.edit_message_text(f"❌ تم رفض طلب السحب {withdraw_id}.")
-    try:
-        await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب السحب الخاص بك (رقم {withdraw_id}). يرجى التواصل مع الدعم.")
-    except:
-        pass
+    if target_user_id:
+        try:
+            await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب السحب الخاص بك (رقم {withdraw_id}). يرجى التواصل مع الدعم.")
+        except:
+            pass
 
 async def confirm_ichancy_charge_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -1945,14 +1957,20 @@ async def reject_ichancy_charge_callback(update: Update, context: ContextTypes.D
 
     with closing(sqlite3.connect(DB_PATH)) as conn:
         c = conn.cursor()
+        # جلب user_id قبل التحديث
+        c.execute("SELECT user_id FROM ichancy_charge_requests WHERE id = ?", (req_id,))
+        row = c.fetchone()
+        target_user_id = row[0] if row else None
+
         c.execute("UPDATE ichancy_charge_requests SET status = 'rejected' WHERE id = ?", (req_id,))
         conn.commit()
 
     await query.edit_message_text(f"❌ تم رفض طلب شحن Ichancy {req_id}.")
-    try:
-        await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب شحن حساب Ichancy الخاص بك (رقم {req_id}). يرجى التواصل مع الدعم.")
-    except:
-        pass
+    if target_user_id:
+        try:
+            await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب شحن حساب Ichancy الخاص بك (رقم {req_id}). يرجى التواصل مع الدعم.")
+        except:
+            pass
 
 async def reject_ichancy_withdraw_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
@@ -1967,14 +1985,20 @@ async def reject_ichancy_withdraw_callback(update: Update, context: ContextTypes
 
     with closing(sqlite3.connect(DB_PATH)) as conn:
         c = conn.cursor()
+        # جلب user_id قبل التحديث
+        c.execute("SELECT user_id FROM ichancy_withdraw_requests WHERE id = ?", (req_id,))
+        row = c.fetchone()
+        target_user_id = row[0] if row else None
+
         c.execute("UPDATE ichancy_withdraw_requests SET status = 'rejected' WHERE id = ?", (req_id,))
         conn.commit()
 
     await query.edit_message_text(f"❌ تم رفض طلب سحب Ichancy {req_id}.")
-    try:
-        await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب سحب من حساب Ichancy الخاص بك (رقم {req_id}). يرجى التواصل مع الدعم.")
-    except:
-        pass
+    if target_user_id:
+        try:
+            await context.bot.send_message(chat_id=target_user_id, text=f"❌ تم رفض طلب سحب من حساب Ichancy الخاص بك (رقم {req_id}). يرجى التواصل مع الدعم.")
+        except:
+            pass
 
 async def publish_message_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
