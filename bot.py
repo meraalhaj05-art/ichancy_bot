@@ -514,22 +514,18 @@ def format_remaining_time(target_date_str: str) -> str:
 
 def get_main_menu_keyboard():
     keyboard = [
-        [InlineKeyboardButton("❤️ إيداع رصيد", callback_data="charge"),
-         InlineKeyboardButton("💸 سحب رصيد", callback_data="withdraw")],
-        [InlineKeyboardButton("👥 نظام الإحالات", callback_data="referral_system")],
-        [InlineKeyboardButton("🎁 اهداء رصيد", callback_data="gift"),
-         InlineKeyboardButton("🎟️ كود هدية", callback_data="gift_code")],
-        [InlineKeyboardButton("📩 رسالة للادمن", callback_data="message_admin"),
-         
-        [InlineKeyboardButton("📚 الشروحات", callback_data="tutorials"),
-        
-        
-        [InlineKeyboardButton("💰 رصيدي /balance", callback_data="balance")],
-        [InlineKeyboardButton("🎁 البونصات والعروض", callback_data="bonuses")],
-        [InlineKeyboardButton("🆕 إنشاء حساب Ichancy", callback_data="register_ichancy")],
-        [InlineKeyboardButton("📋 بيانات حساب Ichancy", callback_data="my_ichancy_account")],
-        [InlineKeyboardButton("📋 حساب Ichancy", callback_data="ichancy_menu")],
-        
+    [InlineKeyboardButton("❤️ إيداع رصيد", callback_data="charge"),
+     InlineKeyboardButton("💸 سحب رصيد", callback_data="withdraw")],
+    [InlineKeyboardButton("👥 نظام الإحالات", callback_data="referral_system")],
+    [InlineKeyboardButton("🎁 اهداء رصيد", callback_data="gift"),
+     InlineKeyboardButton("🎟️ كود هدية", callback_data="gift_code")],
+    [InlineKeyboardButton("📩 رسالة للادمن", callback_data="message_admin")],
+    [InlineKeyboardButton("📚 الشروحات", callback_data="tutorials")],
+    [InlineKeyboardButton("💰 رصيدي /balance", callback_data="balance")],
+    [InlineKeyboardButton("🎁 البونصات والعروض", callback_data="bonuses")],
+    [InlineKeyboardButton("🆕 إنشاء حساب Ichancy", callback_data="register_ichancy")],
+    [InlineKeyboardButton("📋 بيانات حساب Ichancy", callback_data="my_ichancy_account")],
+    [InlineKeyboardButton("📋 حساب Ichancy", callback_data="ichancy_menu")],
     ]
     return InlineKeyboardMarkup(keyboard)
 
