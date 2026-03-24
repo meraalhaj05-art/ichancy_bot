@@ -31,9 +31,9 @@ ADMIN_ID = 8241794104
 REFERRAL_BONUS = 5000
 REFERRAL_PERCENT = 0.10
 
-USDT_BEP20 = "0x22af52d82a6f9a3dae664d161d5c0ab8a6aeddaa"
-USDT_TRC20 = "TKC5KyUbsvMUBKG3STb56zdvrWAW9CjGhs"
-SYRIATEL_CODES = ["32747700", "31031520"]
+USDT_BEP20 = "0x476d8a8e7b05430a38104e2ec94167310b3bb154"
+USDT_TRC20 = "TSfr2bJDJL3S63BQRqjiRAWbxnkrR7Pju7"
+SYRIATEL_CODES = ["51856802","14969577"]
 
 # رابط الدخول إلى موقع Ichancy
 ICHANCY_LOGIN_URL = "https://www.ichancy.com/ar#/login"
@@ -514,22 +514,22 @@ def format_remaining_time(target_date_str: str) -> str:
 
 def get_main_menu_keyboard():
     keyboard = [
-        [InlineKeyboardButton("❤️ شحن رصيد", callback_data="charge"),
+        [InlineKeyboardButton("❤️ إيداع رصيد", callback_data="charge"),
          InlineKeyboardButton("💸 سحب رصيد", callback_data="withdraw")],
         [InlineKeyboardButton("👥 نظام الإحالات", callback_data="referral_system")],
         [InlineKeyboardButton("🎁 اهداء رصيد", callback_data="gift"),
          InlineKeyboardButton("🎟️ كود هدية", callback_data="gift_code")],
         [InlineKeyboardButton("📩 رسالة للادمن", callback_data="message_admin"),
-         InlineKeyboardButton("📜 السجل", callback_data="history")],
+         
         [InlineKeyboardButton("📚 الشروحات", callback_data="tutorials"),
-         InlineKeyboardButton("📲 ichancy apk", callback_data="apk")],
-        [InlineKeyboardButton("🎮 دخول مباشر للألعاب", callback_data="games")],
+        
+        
         [InlineKeyboardButton("💰 رصيدي /balance", callback_data="balance")],
         [InlineKeyboardButton("🎁 البونصات والعروض", callback_data="bonuses")],
         [InlineKeyboardButton("🆕 إنشاء حساب Ichancy", callback_data="register_ichancy")],
         [InlineKeyboardButton("📋 بيانات حساب Ichancy", callback_data="my_ichancy_account")],
         [InlineKeyboardButton("📋 حساب Ichancy", callback_data="ichancy_menu")],
-        [InlineKeyboardButton("👑 لوحة المشرف", callback_data="admin_panel")],
+        
     ]
     return InlineKeyboardMarkup(keyboard)
 
@@ -538,21 +538,20 @@ def get_back_keyboard():
 
 def get_payment_methods_keyboard():
     keyboard = [
-        [InlineKeyboardButton("Sham Cash Auto ➡️ (USD, SYP)", callback_data="pay_sham")],
+        
         [InlineKeyboardButton("Syriatel Cash ✅", callback_data="pay_syriatel")],
         [InlineKeyboardButton("عملات رقمية USDT", callback_data="pay_usdt")],
-        [InlineKeyboardButton("Bemo Bank ❌", callback_data="pay_bemo")],
         [InlineKeyboardButton("🔙 القائمة الرئيسية", callback_data="main_menu")],
     ]
     return InlineKeyboardMarkup(keyboard)
 
 def get_withdrawal_methods_keyboard():
     keyboard = [
-        [InlineKeyboardButton("Sham Cash 💳", callback_data="withdraw_sham")],
+    
         [InlineKeyboardButton("Syriatel Cash 📱", callback_data="withdraw_syriatel")],
         [InlineKeyboardButton("USDT (TRC20) 💎", callback_data="withdraw_usdt_trc20")],
         [InlineKeyboardButton("USDT (BEP20) 💎", callback_data="withdraw_usdt_bep20")],
-        [InlineKeyboardButton("BTC (Bitcoin) ₿", callback_data="withdraw_btc")],
+        
         [InlineKeyboardButton("🔙 القائمة الرئيسية", callback_data="main_menu")],
     ]
     return InlineKeyboardMarkup(keyboard)
@@ -641,13 +640,7 @@ async def offers_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     offers_text = (
         "🔥 *أهلاً بكم في البوت الأقوى على الإطلاق* 🔥\n\n"
-        "🎁 *عروض البونصات الترحيبية:*\n"
-        "• تعبئة زيادة على الرصيد بنسبة *42%* للاعب الجديد!\n\n"
-        "💸 *عروض التعبئة الدائمة (لمدة شهر):*\n"
-        "• تعبئة عبر *Sham Cash*: زيادة *20%* دائم\n"
-        "• تعبئة عبر *Syriatel Cash*: زيادة *20%* دائم\n"
-        "• تعبئة عبر *USDT*: زيادة *22%* دائم\n\n"
-        "⏳ *العروض سارية لفترة محدودة، اغتنم الفرصة الآن!*"
+        
     )
     await update.message.reply_text(offers_text, parse_mode='Markdown')
 
@@ -830,9 +823,7 @@ async def withdraw_method_selected(update: Update, context: ContextTypes.DEFAULT
     method = query.data.replace("withdraw_", "")
     context.user_data["withdraw_method"] = method
 
-    if method == "sham":
-        await query.edit_message_text("🔹 *Sham Cash*\n\nأرسل الآن رقم محفظتك في شام كاش:", parse_mode='Markdown', reply_markup=get_back_keyboard())
-    elif method == "syriatel":
+        if method == "syriatel":
         await query.edit_message_text("🔹 *Syriatel Cash*\n\nأرسل الآن رقم محفظتك في سيريتيل كاش:", parse_mode='Markdown', reply_markup=get_back_keyboard())
     elif method == "usdt_trc20":
         await query.edit_message_text("🔹 *USDT - شبكة TRC20*\n\nأرسل الآن عنوان محفظتك (USDT):", parse_mode='Markdown', reply_markup=get_back_keyboard())
