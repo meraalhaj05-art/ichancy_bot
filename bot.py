@@ -819,7 +819,7 @@ async def withdraw_method_selected(update: Update, context: ContextTypes.DEFAULT
     method = query.data.replace("withdraw_", "")
     context.user_data["withdraw_method"] = method
 
-        if method == "syriatel":
+    if method == "syriatel":
         await query.edit_message_text("🔹 *Syriatel Cash*\n\nأرسل الآن رقم محفظتك في سيريتيل كاش:", parse_mode='Markdown', reply_markup=get_back_keyboard())
     elif method == "usdt_trc20":
         await query.edit_message_text("🔹 *USDT - شبكة TRC20*\n\nأرسل الآن عنوان محفظتك (USDT):", parse_mode='Markdown', reply_markup=get_back_keyboard())
